@@ -1,0 +1,5 @@
+export GOVERSION="1.7.1"
+export GOROOT="$HOME/local/go/$GOVERSION/go"
+export GOPATH="$HOME/.go"
+export PATH="$GOROOT/bin:$PATH"
+export PATH="$GOPATH/bin:$PATH"

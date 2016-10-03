@@ -1,0 +1,4 @@
+export PATH="$HOME/repo/github.com/junegunn/fzf/bin:$PATH"
+export MANPATH="$HOME/repo/github.com/junegunn/fzf/man:$MANPATH"
+
+export FZF_DEFAULT_OPTS="--reverse --inline-info"

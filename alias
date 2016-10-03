@@ -1,0 +1,89 @@
+# ls
+alias ls='ls -alh --color'
+alias ks="ls"
+
+# du/df
+alias du="du -h"
+alias df="df -h"
+alias duh="du -h ./ --max-depth=1"
+
+# su
+alias su="su -l"
+
+# less
+alias less='less -r'
+
+# tmux
+alias tm='tmuxx'
+
+alias pon='predict-on'
+alias poff='predict-off'
+
+alias cp='nocorrect cp'
+
+alias gst='git status -s -b'
+alias gc='git commit'
+
+# extract http://d.hatena.ne.jp/jeneshicc/20110215/1297778049
+extract () {
+  if [ -f $1 ] ; then
+      case $1 in
+          *.tar.bz2)   tar xvjf $1    ;;
+          *.tar.gz)    tar xvzf $1    ;;
+          *.tar.xz)    tar xvJf $1    ;;
+          *.bz2)       bunzip2 $1     ;;
+          *.rar)       unrar x $1     ;;
+          *.gz)        gunzip $1      ;;
+          *.tar)       tar xvf $1     ;;
+          *.tbz2)      tar xvjf $1    ;;
+          *.tgz)       tar xvzf $1    ;;
+          *.zip)       unzip $1       ;;
+          *.Z)         uncompress $1  ;;
+          *.7z)        7z x $1        ;;
+          *.lzma)      lzma -dv $1    ;;
+          *.xz)        xz -dv $1      ;;
+          *)           echo "don't know how to extract '$1'..." ;;
+      esac
+  else
+      echo "'$1' is not a valid file!"
+  fi
+}
+alias ext='extract'
+
+alias be='bundle exec'
+
+#server
+
+function static_httpd {
+  [ "$#" -ne 1 ] && echo "plz set port" && exit
+  if type plackup > /dev/null; then
+    plackup -MPlack::App::Directory -e 'Plack::App::Directory->new(root => ".")->to_app'
+  elif type ruby > /dev/null; then
+    if ruby -v | grep -qm1 'ruby 2\.'; then
+      ruby -run -e httpd -- --port=$1 .
+    else
+      ruby -rwebrick -e 'WEBrick::HTTPServer.new(:Port => $1, :DocumentRoot => ".").start'
+    fi
+  elif type python > /dev/null; then
+    if python -V 2>&1 | grep -qm1 'Python 3\.'; then
+      python -m http.server $1
+    else
+      python -m SimpleHTTPServer $1
+    fi
+  elif type node > /dev/null; then
+    node -e "var c=require('connect'), d=process.env.PWD; c().use(c.logger()).use(c.static(d)).use(c.directory(d)).listen($1);"
+  elif type php > /dev/null && php -v | grep -qm1 'PHP 5\.[45]\.'; then
+    php -S 0.0.0.0:$1
+  elif type erl > /dev/null; then
+    erl -eval 'inets:start(), inets:start(httpd, [{server_name, "httpd"}, {server_root, "."}, {document_root, "."}, {port, $1}])'
+  fi
+}
+
+alias httpd=static_httpd
+
+#oneliner
+alias lstree="ls -R | grep \":$\" | sed -e 's/:$//' -e 's/[^-][^\/]*\//--/g' -e 's/^/   /' -e 's/-/|/'"
+
+#adb
+alias logcat="adb logcat -C"
+
