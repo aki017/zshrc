@@ -67,7 +67,7 @@ ZSH_VCS_PROMPT_STASHED_SIGIL=" %{$fg[blue]%}$DRH%{$bg[blue]$fg[white]%}⚑ "
 ZSH_VCS_PROMPT_CLEAN_SIGIL=" %{$fg[green]%}$DRH%{$bg[green]$fg[white]%}✔ "
 ZSH_VCS_PROMPT_ENABLE_CACHING='true'
 [ -f $HOME/repo/github.com/yonchu/zsh-vcs-prompt/zshrc.sh ] && source $HOME/repo/github.com/yonchu/zsh-vcs-prompt/zshrc.sh
-RPROMPT='$(vcs_super_info) %{$fg[white]%}$DRH%{$bg[white]$fg[blue]%} %(5~,%-2~/.../%2~,%~)%{$fg[white]}${RESET}'
+RPROMPT='$(vcs_super_info) %{$fg[white]%}$DRH%{$bg[white]$fg[blue]%} %(5~,%-2~/.../%2~,%~)%{$fg[white]%}$RESET'
 
 
 # 指定したコマンド名がなく、ディレクトリ名と一致した場合 cd する
@@ -360,6 +360,7 @@ load () {
 }
 
 load $HOME/repo/github.com/rupa/z/z.sh
+load $HOME/repo/github.com/zsh-users/zsh-autosuggestions/zsh-autosuggestions.zsh
 load $HOME/repo/github.com/aki017/zshrc/go
 load $HOME/repo/github.com/aki017/zshrc/fzf
 load $HOME/repo/github.com/aki017/zshrc/peco
