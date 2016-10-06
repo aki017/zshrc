@@ -1,0 +1,20 @@
+export SHELL="/usr/local/bin/zsh"
+[ -z "$TMUX" -a -n "$USE_TMUX" ] && {
+    [ -n "$ATTACH_ONLY" ] && {
+        cd
+        tmux a 2>/dev/null || exec tmux
+        exit
+    }
+
+    tmux new-window -c "$PWD" \; a 2>/dev/null || exec tmux
+    exit
+}
+
+alias pbcopy="lemonade copy"
+alias pbpaste="lemonade paste"
+
+function lemonade_paste() {
+    BUFFER="$(lemonade paste)"
+}
+zle -N lemonade_paste
+bindkey "^V" lemonade_paste

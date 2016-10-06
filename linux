@@ -2,3 +2,4 @@ export TERM=xterm-256color
 
 alias pbcopy='xclip -i'
 alias pbpaste='xclip -o'
+alias open='xdg-open'

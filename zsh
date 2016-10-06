@@ -367,6 +367,7 @@ load $HOME/repo/github.com/aki017/zshrc/peco
 load $HOME/repo/github.com/aki017/zshrc/alias
 load $HOME/repo/github.com/aki017/zshrc/rbenv
 load $HOME/repo/github.com/aki017/zshrc/direnv
+load $HOME/repo/github.com/aki017/zshrc/tmux
 
 case "${OSTYPE}" in
   darwin*)
@@ -376,6 +377,10 @@ case "${OSTYPE}" in
     load $HOME/repo/github.com/aki017/zshrc/linux
   ;;
 esac
+
+if grep -q Microsoft /proc/version; then
+    load $HOME/repo/github.com/aki017/zshrc/wsl
+fi
 
 ## local固有設定
 [ -f ~/zshrc.local ] && source ~/zshrc.local
