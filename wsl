@@ -12,9 +12,11 @@ export SHELL="/usr/local/bin/zsh"
 
 alias pbcopy="lemonade copy"
 alias pbpaste="lemonade paste"
+alias xdg-open="lemonade open"
+
 
 function lemonade_paste() {
-    BUFFER="$(lemonade paste)"
+    BUFFER="$BUFFER$(lemonade paste)"
 }
 zle -N lemonade_paste
 bindkey "^V" lemonade_paste

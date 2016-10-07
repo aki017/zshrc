@@ -355,6 +355,8 @@ export EDITOR=vim
 autoload -Uz compinit
 compinit
 
+bindkey '^^' autosuggest-execute
+
 load () {
   [ -f $1 ] && source $1 || echo "$1 not found"
 }
@@ -367,7 +369,6 @@ load $HOME/repo/github.com/aki017/zshrc/peco
 load $HOME/repo/github.com/aki017/zshrc/alias
 load $HOME/repo/github.com/aki017/zshrc/rbenv
 load $HOME/repo/github.com/aki017/zshrc/direnv
-load $HOME/repo/github.com/aki017/zshrc/tmux
 
 case "${OSTYPE}" in
   darwin*)
@@ -385,3 +386,4 @@ fi
 ## local固有設定
 [ -f ~/zshrc.local ] && source ~/zshrc.local
 
+load $HOME/repo/github.com/zsh-users/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
