@@ -379,7 +379,7 @@ case "${OSTYPE}" in
   ;;
 esac
 
-if grep -q Microsoft /proc/version; then
+if grep -q Microsoft /proc/version 2>/dev/null; then
     load $HOME/repo/github.com/aki017/zshrc/wsl
 fi
 
