@@ -364,6 +364,7 @@ load () {
 load $HOME/repo/github.com/rupa/z/z.sh
 load $HOME/repo/github.com/zsh-users/zsh-autosuggestions/zsh-autosuggestions.zsh
 load $HOME/repo/github.com/aki017/zshrc/go
+load $HOME/repo/github.com/aki017/zshrc/java
 load $HOME/repo/github.com/aki017/zshrc/fzf
 load $HOME/repo/github.com/aki017/zshrc/peco
 load $HOME/repo/github.com/aki017/zshrc/alias
