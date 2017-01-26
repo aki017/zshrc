@@ -80,10 +80,10 @@ setopt auto_pushd
 setopt pushd_ignore_dups
 
 # コマンドのスペルチェックをする
-setopt correct
+# setopt correct
 
 # コマンドライン全てのスペルチェックをする
-setopt correct_all
+# setopt correct_all
 
 # 上書きリダイレクトの禁止
 setopt no_clobber
@@ -366,6 +366,7 @@ load $HOME/repo/github.com/zsh-users/zsh-autosuggestions/zsh-autosuggestions.zsh
 load $HOME/repo/github.com/aki017/zshrc/peco
 load $HOME/repo/github.com/aki017/zshrc/alias
 load $HOME/repo/github.com/aki017/zshrc/rbenv
+load $HOME/repo/github.com/aki017/zshrc/nodebrew
 load $HOME/repo/github.com/aki017/zshrc/direnv
 
 case "${OSTYPE}" in

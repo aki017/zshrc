@@ -14,7 +14,6 @@ alias pbcopy="lemonade copy"
 alias pbpaste="lemonade paste"
 alias xdg-open="lemonade open"
 
-
 function lemonade_paste() {
     BUFFER="$BUFFER$(lemonade paste)"
 }
