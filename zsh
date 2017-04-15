@@ -312,6 +312,7 @@ zstyle ':completion:*' list-colors 'di=36' 'ln=35' 'so=32' 'ex=31' 'bd=46;34' 'c
 alias grep="grep --color=auto"
 export EDITOR=vim
 
+unsetopt BG_NICE
 # zsh の exntended_glob と HEAD^^^ を共存させる。
 # typeset -A abbreviations
 # abbreviations=(
