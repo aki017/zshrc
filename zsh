@@ -386,3 +386,6 @@ fi
 [ -f ~/zshrc.local ] && source ~/zshrc.local
 
 load $HOME/repo/github.com/zsh-users/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+
+# added by travis gem
+[ -f /home/aki/.travis/travis.sh ] && source /home/aki/.travis/travis.sh
