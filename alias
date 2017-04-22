@@ -55,7 +55,7 @@ alias be='bundle exec'
 #server
 
 function static_httpd {
-  [ "$#" -ne 1 ] && echo "plz set port" && exit
+  [ "$#" -ne 1 ] && echo "plz set port" && return -1
   if type plackup > /dev/null; then
     plackup -MPlack::App::Directory -e 'Plack::App::Directory->new(root => ".")->to_app'
   elif type ruby > /dev/null; then
