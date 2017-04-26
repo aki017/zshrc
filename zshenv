@@ -2,6 +2,7 @@ load () {
   [ -f $1 ] && source $1 || echo "$1 not found"
 }
 load $HOME/repo/github.com/aki017/zshrc/go
+load $HOME/repo/github.com/aki017/zshrc/python
 load $HOME/repo/github.com/aki017/zshrc/fzf
 load $HOME/repo/github.com/aki017/zshrc/rbenv
 
