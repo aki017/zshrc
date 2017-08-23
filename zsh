@@ -80,10 +80,10 @@ setopt auto_pushd
 setopt pushd_ignore_dups
 
 # コマンドのスペルチェックをする
-setopt correct
+# setopt correct
 
 # コマンドライン全てのスペルチェックをする
-setopt correct_all
+# setopt correct_all
 
 # 上書きリダイレクトの禁止
 setopt no_clobber
@@ -312,6 +312,7 @@ zstyle ':completion:*' list-colors 'di=36' 'ln=35' 'so=32' 'ex=31' 'bd=46;34' 'c
 alias grep="grep --color=auto"
 export EDITOR=vim
 
+unsetopt BG_NICE
 # zsh の exntended_glob と HEAD^^^ を共存させる。
 # typeset -A abbreviations
 # abbreviations=(
@@ -363,11 +364,10 @@ load () {
 
 load $HOME/repo/github.com/rupa/z/z.sh
 load $HOME/repo/github.com/zsh-users/zsh-autosuggestions/zsh-autosuggestions.zsh
-load $HOME/repo/github.com/aki017/zshrc/go
-load $HOME/repo/github.com/aki017/zshrc/fzf
 load $HOME/repo/github.com/aki017/zshrc/peco
 load $HOME/repo/github.com/aki017/zshrc/alias
 load $HOME/repo/github.com/aki017/zshrc/rbenv
+load $HOME/repo/github.com/aki017/zshrc/nodebrew
 load $HOME/repo/github.com/aki017/zshrc/direnv
 
 case "${OSTYPE}" in
@@ -387,3 +387,6 @@ fi
 [ -f ~/zshrc.local ] && source ~/zshrc.local
 
 load $HOME/repo/github.com/zsh-users/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+
+# added by travis gem
+[ -f /home/aki/.travis/travis.sh ] && source /home/aki/.travis/travis.sh

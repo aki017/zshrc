@@ -1,0 +1,15 @@
+#! /usr/bin/env ruby
+keys = [
+  'HKEY_CURRENT_USER\Environment',
+  'HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Session Manager\Environment'
+]
+
+keys.each do |key|
+  data = `/mnt/c/Windows/System32/reg.exe query '#{key}' /v Path`
+  targets = data.lines[2].split[2].split(";")
+  targets.each do |path|
+    print "PATH=$PATH:/mnt/"
+    print path.gsub("\\","/").sub(/.:/){|r| r[0].downcase}
+    puts
+  end
+end
