@@ -11,3 +11,4 @@ export PATH=$HOME/local/bin:$PATH
 export PATH=$HOME/repo/github.com/aki017/dotfiles/bin:$PATH
 export PATH=$HOME/.nodebrew/current/bin:$PATH
 export MANPATH=$HOME/local/share/man:/usr/local/share/man:$MANPATH
+export DOCKER_HOST=localhost:2375

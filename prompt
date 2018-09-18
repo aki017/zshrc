@@ -1,0 +1,100 @@
+autoload -Uz add-zsh-hook
+autoload -Uz vcs_info
+BG_HOST="027"
+FG_HOST="015"
+BG_NAME="007"
+FG_NAME="004"
+BG_MAIN="000"
+FG_MAIN="015"
+PROMPT=""
+PROMPT="$PROMPT%K{$BG_HOST}%F{$FG_HOST} %m %K{$BG_NAME}%F{$BG_HOST}$DLH"
+PROMPT="$PROMPT%K{$BG_NAME}%F{$FG_NAME} %n %K{$BG_MAIN}%F{$BG_NAME}$DLH"
+PROMPT="$PROMPT%F{$FG_MAIN} "
+
+RPROMPT=""
+RPROMPT="$RPROMPT$DRH ${vcs_info_msg_0_} $DRS 3 $DRS %c"
+RPROMPT="$RPROMPT"
+
+setopt promptsubst
+autoload -Uz vcs_info
+zstyle ':vcs_info:*' check-for-changes true
+zstyle ':vcs_info:*' get-revision true
+
+FORCE_RUN_VCS_INFO=1
+
+zstyle ':vcs_info:*+pre-get-data:*' hooks pre-get-data
++vi-pre-get-data() {
+    [[ "$vcs" != git && "$vcs" != hg ]] && return
+
+    if [[ -n $FORCE_RUN_VCS_INFO ]]; then
+        FORCE_RUN_VCS_INFO=
+        return
+    fi
+
+    ret=1
+    case "$(fc -ln $(($HISTCMD-1)))" in
+        git*)
+            ret=0
+            ;;
+        hg*)
+            ret=0
+            ;;
+    esac
+}
+
+prompt_precmd() {
+    vcs_info
+}
+add-zsh-hook precmd prompt_precmd
+
+prompt_chpwd() {
+    FORCE_RUN_VCS_INFO=1
+}
+add-zsh-hook chpwd prompt_chpwd
+
+zstyle ':vcs_info:git+set-message:*' hooks \
+         git-hook-begin \
+         git-untracked
+
+
+function +vi-git-hook-begin() {
+  if [[ $(command git rev-parse --is-inside-work-tree 2> /dev/null) != 'true' ]]; then
+    return 1
+  fi
+
+  return 0
+}
+
+function +vi-git-untracked() {
+  local git_status=$(command git status --porcelain 2> /dev/null)
+  local m1=$(echo $git_status | cut -c 1 | grep -c -v -e ' ' -e '?')
+  local m2=$(echo $git_status | cut -c 2 | grep -c -v -e ' ' -e '?')
+  local m3=$(echo $git_status | cut -c 1-2 | grep -c '??')
+  local branch=$(git symbolic-ref --short HEAD)
+  local up=$(command git rev-list origin/master..master 2>/dev/null|wc -l)
+  local down=$(command git rev-list master..origin/master 2>/dev/null|wc -l)
+  hook_com[misc]=""
+  local color="0"
+  if [[ $m1 -ne 0 ]]; then
+    hook_com[misc]+="%K{$color}%F{121}$DRH%K{121}%F{022}●$m1 "
+    color="121"
+  fi
+  if [[ $m2 -ne 0 ]]; then
+    hook_com[misc]+="%K{$color}%F{225}$DRH%K{225}%F{196}✚$m2 "
+    color="225"
+  fi
+  if [[ $m3 -ne 0 ]]; then
+    hook_com[misc]+="%K{$color}%F{051}$DRH%K{051}%F{053}…$m3 "
+    color="051"
+  fi
+  hook_com[misc]+="%K{$color}%F{024}$DRH%K{024}%F{015} $branch "
+  if [[ $up -ne 0 ]]; then
+    hook_com[misc]+="$DRS↑$up "
+  fi
+  if [[ $down -ne 0 ]]; then
+    hook_com[misc]+="$DRS↓$down "
+  fi
+}
+zstyle ':vcs_info:git*' formats "%m"
+zstyle ':vcs_info:git*' actionformats "<%a%m"
+RPROMPT='${vcs_info_msg_0_:- }'
