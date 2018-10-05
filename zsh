@@ -6,6 +6,7 @@ setopt prompt_subst
 REPORTTIME=3
 
 load () {
+  source $1 || echo "found $1 $?"
   [ -f $1 ] && source $1 || echo "$1 not found"
 }
 
@@ -303,7 +304,6 @@ load $HOME/repo/github.com/zsh-users/zsh-autosuggestions/zsh-autosuggestions.zsh
 load $HOME/repo/github.com/aki017/zshrc/peco
 load $HOME/repo/github.com/aki017/zshrc/alias
 load $HOME/repo/github.com/aki017/zshrc/rbenv
-load $HOME/repo/github.com/aki017/zshrc/nvm
 load $HOME/repo/github.com/aki017/zshrc/direnv
 
 case "${OSTYPE}" in

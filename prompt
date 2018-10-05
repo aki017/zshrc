@@ -39,6 +39,12 @@ zstyle ':vcs_info:*+pre-get-data:*' hooks pre-get-data
         hg*)
             ret=0
             ;;
+        gst*)
+            ret=0
+            ;;
+        vim*)
+            ret=0
+            ;;
     esac
 }
 
@@ -67,8 +73,8 @@ function +vi-git-hook-begin() {
 
 function +vi-git-untracked() {
   local git_status=$(command git status --porcelain 2> /dev/null)
-  local m1=$(echo $git_status | cut -c 1 | grep -c -v -e ' ' -e '?')
-  local m2=$(echo $git_status | cut -c 2 | grep -c -v -e ' ' -e '?')
+  local m1=$(echo $git_status | cut -c 1 | grep -c -e 'M' -e 'A' -e 'D' -e 'R' -e 'C')
+  local m2=$(echo $git_status | cut -c 2 | grep -c -e 'M' -e 'A' -e 'D' -e 'R' -e 'C' -e 'U')
   local m3=$(echo $git_status | cut -c 1-2 | grep -c '??')
   local branch=$(git symbolic-ref --short HEAD)
   local up=$(command git rev-list origin/master..master 2>/dev/null|wc -l)
