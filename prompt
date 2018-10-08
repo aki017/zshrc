@@ -7,13 +7,9 @@ FG_NAME="004"
 BG_MAIN="000"
 FG_MAIN="015"
 PROMPT=""
-PROMPT="$PROMPT%K{$BG_HOST}%F{$FG_HOST} %m %K{$BG_NAME}%F{$BG_HOST}$DLH"
-PROMPT="$PROMPT%K{$BG_NAME}%F{$FG_NAME} %n %K{$BG_MAIN}%F{$BG_NAME}$DLH"
+PROMPT="$PROMPT%K{$BG_HOST}%F{$FG_HOST} %m %f%k%K{$BG_NAME}%F{$BG_HOST}$DLH%f%k"
+PROMPT="$PROMPT%K{$BG_NAME}%F{$FG_NAME} %n %f%k%K{$BG_MAIN}%F{$BG_NAME}$DLH%f%k"
 PROMPT="$PROMPT%F{$FG_MAIN} "
-
-RPROMPT=""
-RPROMPT="$RPROMPT$DRH ${vcs_info_msg_0_} $DRS 3 $DRS %c"
-RPROMPT="$RPROMPT"
 
 setopt promptsubst
 autoload -Uz vcs_info
@@ -80,20 +76,20 @@ function +vi-git-untracked() {
   local up=$(command git rev-list origin/master..master 2>/dev/null|wc -l)
   local down=$(command git rev-list master..origin/master 2>/dev/null|wc -l)
   hook_com[misc]=""
-  local color="0"
+  local prev_color="0"
   if [[ $m1 -ne 0 ]]; then
-    hook_com[misc]+="%K{$color}%F{121}$DRH%K{121}%F{022}●$m1 "
-    color="121"
+    hook_com[misc]+="%K{$prev_color}%F{121}$DRH%k%f%K{121}%F{022}●$m1 %k%f"
+    prev_color="121"
   fi
   if [[ $m2 -ne 0 ]]; then
-    hook_com[misc]+="%K{$color}%F{225}$DRH%K{225}%F{196}✚$m2 "
-    color="225"
+    hook_com[misc]+="%K{$prev_color}%F{225}$DRH%k%f%K{225}%F{196}✚$m2 %k%f"
+    prev_color="225"
   fi
   if [[ $m3 -ne 0 ]]; then
-    hook_com[misc]+="%K{$color}%F{051}$DRH%K{051}%F{053}…$m3 "
-    color="051"
+    hook_com[misc]+="%K{$prev_color}%F{051}$DRH%k%f%K{051}%F{053}…$m3 %k%f"
+    prev_color="051"
   fi
-  hook_com[misc]+="%K{$color}%F{024}$DRH%K{024}%F{015} $branch "
+  hook_com[misc]+="%K{$prev_color}%F{024}$DRH%k%f%K{024}%F{015} $branch %k%f"
   if [[ $up -ne 0 ]]; then
     hook_com[misc]+="$DRS↑$up "
   fi
@@ -102,5 +98,5 @@ function +vi-git-untracked() {
   fi
 }
 zstyle ':vcs_info:git*' formats "%m"
-zstyle ':vcs_info:git*' actionformats "<%a%m"
+zstyle ':vcs_info:git*' actionformats "$DRS%a%m"
 RPROMPT='${vcs_info_msg_0_:- }'

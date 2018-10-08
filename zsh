@@ -17,7 +17,6 @@ export DLS=""
 export DRH=""
 export DRS=""
 
-TERM=xterm-256color
 load $HOME/repo/github.com/aki017/zshrc/prompt
 
 # 指定したコマンド名がなく、ディレクトリ名と一致した場合 cd する
@@ -300,7 +299,6 @@ compinit
 bindkey '^^' autosuggest-execute
 
 load $HOME/repo/github.com/rupa/z/z.sh
-load $HOME/repo/github.com/zsh-users/zsh-autosuggestions/zsh-autosuggestions.zsh
 load $HOME/repo/github.com/aki017/zshrc/peco
 load $HOME/repo/github.com/aki017/zshrc/alias
 load $HOME/repo/github.com/aki017/zshrc/rbenv
@@ -327,4 +325,5 @@ fi
 
 export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
 
+load $HOME/repo/github.com/zsh-users/zsh-autosuggestions/zsh-autosuggestions.zsh
 load $HOME/repo/github.com/zsh-users/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
