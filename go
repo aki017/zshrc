@@ -1,4 +1,4 @@
-export GOVERSION="1.11"
+export GOVERSION="1.14.3"
 export GOROOT="$HOME/local/go/$GOVERSION/go"
 export GOPATH="$HOME/.go"
 export PATH="$GOROOT/bin:$PATH"

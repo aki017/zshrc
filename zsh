@@ -1,4 +1,3 @@
-zmodload zsh/zprof
 export LANG=ja_JP.UTF-8
 export LESSCHARSET=utf-8
 
@@ -303,6 +302,7 @@ load $HOME/repo/github.com/aki017/zshrc/peco
 load $HOME/repo/github.com/aki017/zshrc/alias
 load $HOME/repo/github.com/aki017/zshrc/rbenv
 load $HOME/repo/github.com/aki017/zshrc/direnv
+load $HOME/repo/github.com/aki017/zshrc/git
 
 case "${OSTYPE}" in
   darwin*)
@@ -313,8 +313,8 @@ case "${OSTYPE}" in
   ;;
 esac
 
-if grep -q Microsoft /proc/version 2>/dev/null; then
-    load $HOME/repo/github.com/aki017/zshrc/wsl
+if grep -q icrosoft /proc/version 2>/dev/null; then
+    #load $HOME/repo/github.com/aki017/zshrc/wsl
 fi
 
 ## local固有設定
