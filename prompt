@@ -1,15 +1,16 @@
 autoload -Uz add-zsh-hook
 autoload -Uz vcs_info
+ZLE_RPROMPT_INDENT=0
 BG_HOST="027"
 FG_HOST="015"
 BG_NAME="007"
 FG_NAME="004"
-BG_MAIN="000"
+BG_MAIN="default"
 FG_MAIN="015"
 PROMPT=""
 PROMPT="$PROMPT%K{$BG_HOST}%F{$FG_HOST} %m %f%k%K{$BG_NAME}%F{$BG_HOST}$DLH%f%k"
 PROMPT="$PROMPT%K{$BG_NAME}%F{$FG_NAME} %n %f%k%K{$BG_MAIN}%F{$BG_NAME}$DLH%f%k"
-PROMPT="$PROMPT%F{$FG_MAIN} "
+PROMPT="$PROMPT%K{$BG_MAIN}%F{$FG_MAIN} "
 
 setopt promptsubst
 autoload -Uz vcs_info
@@ -76,13 +77,13 @@ function +vi-git-untracked() {
   local up=$(command git rev-list origin/master..master 2>/dev/null|wc -l)
   local down=$(command git rev-list master..origin/master 2>/dev/null|wc -l)
   hook_com[misc]=""
-  local prev_color="0"
+  local prev_color=$BG_MAIN
   if [[ $m1 -ne 0 ]]; then
     hook_com[misc]+="%K{$prev_color}%F{121}$DRH%k%f%K{121}%F{022}●$m1 %k%f"
     prev_color="121"
   fi
   if [[ $m2 -ne 0 ]]; then
-    hook_com[misc]+="%K{$prev_color}%F{225}$DRH%k%f%K{225}%F{196}✚$m2 %k%f"
+    hook_com[misc]+="%K{$prev_color}%F{225}$DRH%k%f%K{225}%F{196}✚ $m2 %k%f"
     prev_color="225"
   fi
   if [[ $m3 -ne 0 ]]; then
@@ -99,4 +100,4 @@ function +vi-git-untracked() {
 }
 zstyle ':vcs_info:git*' formats "%m"
 zstyle ':vcs_info:git*' actionformats "$DRS%a%m"
-RPROMPT='${vcs_info_msg_0_:- }'
+RPROMPT='${vcs_info_msg_0_:-}'

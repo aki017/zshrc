@@ -320,10 +320,5 @@ fi
 ## local固有設定
 [ -f ~/zshrc.local ] && source ~/zshrc.local
 
-# added by travis gem
-[ -f /home/aki/.travis/travis.sh ] && source /home/aki/.travis/travis.sh
-
-export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
-
 load $HOME/repo/github.com/zsh-users/zsh-autosuggestions/zsh-autosuggestions.zsh
 load $HOME/repo/github.com/zsh-users/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
